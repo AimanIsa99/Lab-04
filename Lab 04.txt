@@ -1,0 +1,481 @@
+
+LAB 4
+
+QUESTION 1
+
+SOLUTION A
+
+import java.util.Scanner;
+
+public class L4Q1 
+{
+    public static void main(String[] args) 
+    {
+
+        Scanner input = new Scanner(System.in);
+        
+        System.out.print("Enter an integer: ");
+        int number = input.nextInt();
+        int i;
+  
+    for(i = 1; i <= number; i++) 
+        {
+   if(number % i == 0) 
+            {
+                 if (i != 1 && number / i != 1)
+                 {
+     System.out.format("%d  ", i);
+                 }
+   }
+    }
+    }
+}
+
+SOLUTION B**
+
+import java.util.Scanner;
+
+public class L4Q1 
+{
+    public static void main(String[] args) 
+    {
+
+        Scanner input = new Scanner(System.in);
+        
+        System.out.print("Enter an integer: ");
+        int number = input.nextInt();
+        int i;
+  
+     for(i = 1; i <= number; i++) 
+         {
+             If (number % i == 0) 
+             {
+    System.out.format("%d  ", i);
+         }
+     }
+    }
+}
+
+QUESTION 2
+
+import java.util.Scanner;
+
+public class L4Q2
+{
+    public static void main(String[] args) 
+    {
+
+        Scanner input = new Scanner(System.in);
+        int sum = 0, SUM = 0;
+        
+        int i;
+        
+        System.out.print("Enter the limit, n: ");
+        int num = input.nextInt();
+        
+        for(i = 1; i <= num; i++)
+        {
+            sum += i;
+            SUM += sum;
+
+        }
+
+        System.out.println("The sum is " + SUM + ".");
+    }
+}
+
+QUESTION 3
+
+import java.util.Scanner;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+         Scanner input = new Scanner(System.in);
+
+         int N = 0;
+         int score, min, max;
+         double std_dev, square, average, variance;
+         double sum = 0.0;
+         double sum_x2 = 0.0;
+         min = 100;
+         max = 0;
+    
+         System.out.print("Enter a score [negative score to quit]:");
+         score = input.nextInt();
+
+         //Sentinel loop
+         while(score != -1)
+         {
+             sum += score;
+             square = Math.pow(score, 2);
+             sum_x2 += square;
+             N++;
+    
+             if (score > max)
+             {
+                 max = score;
+             }
+             if (score < min)
+             {
+                 min = score;
+             }
+         
+             System.out.print("Enter a score [negative score to quit]:");
+             score = input.nextInt();
+         }
+         if (N != 0)
+         {
+             average = sum / N;
+             variance = (sum_x2 - (Math.pow(sum, 2) / N)) / (N - 1);
+             std_dev = Math.sqrt(variance);
+
+             System.out.printf("%.1f\n", variance);
+             System.out.printf("Minimum Score: %d\n", min);
+             System.out.printf("Maximum Score: %d\n", max);
+             System.out.printf("Average Score: %.2f\n", average);
+             System.out.printf("Standard Deviation: %.2f\n", std_dev);
+         }
+   }
+}
+
+QUESTION 4**
+
+import java.util.Scanner;
+
+public class L4Q4 {
+    public static void main(String[] args) 
+    {
+        // Create Scanner
+        Scanner input = new Scanner(System.in);
+
+        // Prompt the user to enter the year and first day of the year
+        System.out.print("Enter year: ");
+        int year = input.nextInt();
+        System.out.print("Enter first day of the year: ");
+        int day = input.nextInt();
+
+        // Create header of calender 
+        String header; 
+        System.out.println();
+        for (int month = 1; month <= 12; month++) 
+        {
+            header = "";
+            // Concat current month string to header
+            switch (month) 
+            { 
+                case 1: header += "January "; break;
+                case 2: header += "February "; break;
+                case 3: header += "March "; break;
+                case 4: header += "April "; break;
+                case 5: header += "May "; break;
+                case 6: header += "June "; break;
+                case 7: header += "July "; break;
+
+
+case 8: header += "August "; break;
+                case 9: header += "September "; break;
+                case 10: header += "October "; break;
+                case 11: header += "November "; break;
+                case 12: header += "December "; break;
+            }
+            // Concat current year to header
+            header += year + "";
+
+            // Center header string
+            for (int b = 0; b < 23 - (header.length() / 2); b++) 
+            {
+                System.out.print(" ");
+            }
+
+            // Display header and days of the week string
+            System.out.println(
+                header + "\n-----------------------------------------------\n " +
+                "Sun    Mon    Tue    Wed    Thu    Fri    Sat");
+
+            // Compute day of the week
+            day %= 7;
+            for (int b = 0; b <= day * 7; b++) {
+                System.out.print(" ");
+            }
+
+            // Compute last day of present month
+            int lastDay = 0;
+            if ( month == 1 || month == 3  || month == 5 || month == 7 ||
+                  month == 8 || month == 10 ||month == 12)
+                lastDay += 31;
+            else if (month == 4 || month == 6 || month == 9 || month == 11)
+                lastDay += 30;
+            else { // Test for leap year
+                if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
+                    lastDay += 29;
+                else
+                    lastDay += 28;
+            }
+
+            // Display calender for current month
+            for (int d = 1; d <= lastDay; d++) {
+                // Add a black space before numbers less than 10
+                if (d < 10) 
+                    System.out.print(" ");
+                // Start new line after satuarday
+                if (day % 7 == 6)
+                    System.out.print(d + "\n ");
+                else {
+                    System.out.print(d + "     ");
+                    // After last day of the month go to new line
+                    if (d == lastDay) 
+                        System.out.println();
+                }
+                day++; // increment day
+
+            }
+            System.out.println();
+        }
+    }
+}  
+
+QUESTION 5
+
+import java.util.Random;
+
+public class L4Q5
+{
+    public static void main(String[] args)
+    {
+        Random rand = new Random();
+        int p1, p2;
+        int sum1 = 0;
+        int sum2 = 0;
+        int i = 1;
+
+        // set loop condition as so to prevent overflow beyond maximum score
+        // loop acts as round/number of games
+        while((sum1 <= 100) && (sum2 <= 100))
+        {
+        
+        System.out.printf("ROUND %d: \n", i);
+        // Both players throw for every round            
+        p1 = rand.nextInt(6)+1;
+        System.out.printf("Player 1 got: %d\n", p1);
+
+        p2 = rand.nextInt(6)+1;
+        System.out.printf("Player 2 got: %d\n", p2);
+            
+        /*if statements to evaluate score if their respective scores are 
+          not equal to 6 */
+            if (p1 < 6)
+            {
+                sum1 += p1;
+                //Calculate total score
+            }
+            if (p2 < 6)
+            {
+                sum2 += p2;
+                //Calculate total score
+            }
+            
+            /*if statements with nested while loop to evaluate score if they 
+              scored a 6 */
+            //if-while to prevent an excess of rolling 
+            if (p1 == 6)
+            {
+                System.out.println("Player 1 rolled a 6!");
+                sum1 += p1;
+                //loop needed in case after rolling again, they scored a 6 once more
+                while (p1 == 6)
+                {
+                
+                    System.out.println("Player 1 gets to roll again!");
+                    //If they scored a 6, they are allowed to roll again
+                    p1 = rand.nextInt(6)+1;
+                    //Display what they got
+                    System.out.printf("Player 1 got: %d\n", p1);
+                    //Calculate the sum or their scores
+                    sum1 += p1;
+                    //Display their score after rolling
+                    System.out.printf("Player 1's score: %d\n", sum1);
+                }
+            }
+           
+            /*if statements with nested while loop to evaluate score if they 
+              scored a 6*/
+            if (p2 == 6)
+            {
+                System.out.println("Player 2 rolled a 6!");
+                sum2 += p2;
+                
+                //loop needed in case after rolling again, they scored a 6 once more
+                while (p2 == 6)
+                {
+                    
+                    System.out.println("Player 2 gets to roll again!");
+                    //If they scored a 6, they are allowed to roll again
+                    p2 = rand.nextInt(6)+1;
+                    //Display what they got
+                    System.out.printf("Player 2 got: %d\n", p2);
+                    sum2 += p2;
+                    //Display their score after rolling
+                    System.out.printf("Player 2's score: %d\n", sum2);
+                
+                }
+            }
+         
+         //Each player's latest score after every round
+         System.out.printf("Player 1's current score: %d\n", sum1);    
+         System.out.printf("Player 2's current score: %d\n\n", sum2);
+         
+         
+         /* if statement with break as safety net to prevent excess round when
+            one of the players scored 100 */
+         if (sum1 >= 100 || sum2 >= 100)
+             /*or operator because we only need one of them to reach 100
+             for the game to end */
+             break;
+  
+         
+         System.out.println("NEXT ROUND!\n");
+         i++;
+        }
+        
+        System.out.println("\nGAME ENDS!\n");
+        //To print the final score
+        System.out.println("Player 1's final score: " + sum1);
+        System.out.println("Player 2's final score: " + sum2);
+        
+        //if else statements to determine the winner
+        if (sum1 > sum2)
+        {
+            System.out.println("Player 1 wins!");
+        }
+        else if (sum2 > sum1)
+        {
+            System.out.println("Player 2 wins!");
+        }
+        else
+        {
+            System.out.println("It's a tie!");
+        }
+
+    }
+}
+
+QUESTION 6
+
+import java.util.Random;
+
+public class L4Q6
+{
+    public static void main(String[] args)
+    {
+       int num1, r, i = 0;
+       
+       Random rand = new Random();
+
+       num1 = rand.nextInt();
+
+       if (num1 < 0)
+       {
+           num1 = num1 * -1;
+       }
+
+       System.out.printf("The random number generated is:\t%d\n", num1);
+
+       while(num1 > 0)
+       {
+           i++;
+           r = num1 % 10;
+           num1 /= 10;
+       }
+      
+       System.out.println("The number of the digits of the random number is:\t" + i);
+    }
+}
+
+QUESTION 7
+
+import java.util.Scanner;
+
+public class L4Q7
+{
+    public static void main(String[] args)
+    {
+        Scanner input = new Scanner(System.in);
+        int count;
+        double sumL = 0.0;
+        double balR = 0.0;
+        double unpaid;
+
+        System.out.print("Enter principal amount: ");
+        double P = input.nextInt();
+
+        System.out.print("Enter interest in %: ");
+        double i = input.nextDouble();
+
+        System.out.print("Enter total number of month(s): ");
+        int N = input.nextInt();
+
+        System.out.println("Month\t\t\tMonthlyPayment\t\t     Principal\t\t      Interest\t\t Unpaid Balance\t\tTotal Interest");
+
+        for(count = 1; count <= N; count++)
+        {
+            double M = (P * (i / (12 * 100))) / (1 - Math.pow(1 + (i / (12 * 100)), -N));
+            double C = M * (Math.pow((1 + (i / (12 * 100))), -(1+N-count)));
+            double L = M - C;
+            double R = C - (L / (i / 12 * 100));
+
+            balR += R;
+            unpaid = P - balR;
+            sumL += L;
+
+            System.out.printf("%d\t\t\t\t%.2f  \t\t%.2f\t\t\t%6.2f\t\t\t%7.2f\t\t\t%6.2f\n", count, M, C, L, unpaid, sumL);
+            
+        }
+    }
+}
+
+QUESTION 8
+
+import java.util.Random;
+
+public class L4Q8
+{
+    public static void main(String[] args)
+    {
+         Random rand = new Random();
+         int i, j;
+         int status = 1;
+         int num = 3;
+         int n = rand.nextInt(101);
+         // n is the number of the prime numbers
+
+         if (n >= 1)
+         {
+            System.out.printf("The first %d prime numbers are:\n", n);
+            //2 is a known prime number
+            System.out.println(2);
+         }
+   
+
+         for (i = 2; i <=n;)
+         {
+            for (j = 2;j <= Math.sqrt(num); j++)
+            {
+               if (num%j == 0)
+               {
+                  status = 0;
+                  break;
+               }
+            }
+            if (status != 0 )
+            {
+               System.out.println(num);
+               i++;
+            }
+            status = 1;
+            num++;
+         }         
+        
+    }
+}
